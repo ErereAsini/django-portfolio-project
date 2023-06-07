@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS course_managemnt_db;
 CREATE DATABASE course_managemnt_db;
 
-\c nc_tutorials_db
+\c course_managemnt_db
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
