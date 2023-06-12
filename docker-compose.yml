@@ -2,6 +2,7 @@ version: "3.8"
 services:
   web:
     build: ./app
+    image: 703401427205.dkr.ecr.us-east-1.amazonaws.com/django-portfolio-project
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./app/:/usr/src/app/
@@ -10,19 +11,30 @@ services:
     environment:
       - DB_NAME=course_managemnt_db
       - DB_USER=postgres
-      - DB_PASSWORD=
+      - DB_PASSWORD=admin123
       - DB_HOST=pg
       - DB_PORT=5432
       - DATABASE=postgres
     depends_on:
       - pg
+  nginx:
+    build: ./nginx
+    image: 703401427205.dkr.ecr.us-east-1.amazonaws.com/django-portfolio-project-nginx
+    volumes:
+      - static_volume:/usr/src/app/static
+    ports:
+      - 8000:80
+    depends_on:
+      - web
+volumes:
+  static_volume:
   pg:
     container_name: pg_container_portfolio
     image: postgres:13.2-alpine
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 
+      POSTGRES_PASSWORD: admin123
       POSTGRES_DB: course_managemnt_db
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
@@ -36,7 +48,7 @@ services:
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: 
+      PGADMIN_DEFAULT_PASSWORD: admin123
       PGADMIN_LISTEN_PORT: 5433
       PGADMIN_CONFIG_SERVER_MODE: "False"
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
