@@ -45,14 +45,3 @@ services:
       - "5433:5433"
     depends_on:
       - pg
-  nginx:
-    build: ./nginx
-    image: 703401427205.dkr.ecr.us-east-1.amazonaws.com/django-portfolio-project-nginx
-    volumes:
-      - static_volume:/usr/src/app/static
-    ports:
-      - 8000:80
-    depends_on:
-      - web
-volumes:
-  static_volume:
