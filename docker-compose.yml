@@ -51,7 +51,7 @@ services:
     volumes:
       - static_volume:/usr/src/app/static
     ports:
-      - 8000:80
+      - 8001:80
     depends_on:
       - web
 volumes:
