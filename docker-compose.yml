@@ -2,7 +2,7 @@ version: "3.8"
 services:
   web:
     build: ./app
-    image: 703401427205.dkr.ecr.us-east-1.amazonaws.com/django-portfolio-project
+    image: 703401427205.dkr.ecr.us-east-1.amazonaws.com/django-portfolio-project-web
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./app/:/usr/src/app/
@@ -17,6 +17,15 @@ services:
       - DATABASE=postgres
     depends_on:
       - pg
+  nginx:
+    build: ./nginx
+    image: 703401427205.dkr.ecr.us-east-1.amazonaws.com/django-portfolio-project-nginx
+    volumes:
+      - static_volume:/usr/src/app/static
+    ports:
+      - 8000:80
+    depends_on:
+      - web
   pg:
     container_name: pg_container_portfolio
     image: postgres:13.2-alpine
