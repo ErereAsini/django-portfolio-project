@@ -15,7 +15,7 @@ services:
       - DB_HOST=coursemanagemnt.c0rrv7nfzeoi.us-east-1.rds.amazonaws.com
       - DB_PORT=5432
       - DATABASE=postgres
-      - VIRTUAL_HOST=ec2-34-195-102-46.compute-1.amazonaws.com
+      - VIRTUAL_HOST=ec2-54-175-33-16.compute-1.amazonaws.com
       - VIRTUAL_PORT=8000
   pg:
     container_name: pg_container_portfolio
